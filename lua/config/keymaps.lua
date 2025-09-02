@@ -1,18 +1,19 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+
 local function run_code()
   local ft = vim.bo.filetype
   local cmd = ""
 
   if ft == "python" then
-    cmd = "python3 " .. vim.fn.shellescape(vim.fn.expand("%"))
+    cmd = "py -3.11 " .. vim.fn.shellescape(vim.fn.expand("%"))
   elseif ft == "java" then
     cmd = "javac " .. vim.fn.shellescape(vim.fn.expand("%")) .. " && java " .. vim.fn.shellescape(vim.fn.expand("%:r"))
   elseif ft == "javascript" then
     cmd = "node " .. vim.fn.shellescape(vim.fn.expand("%"))
   elseif ft == "html" then
-    cmd = "start " .. vim.fn.shellescape(vim.fn.expand("%")) -- windows
+    cmd = "start " .. vim.fn.shellescape(vim.fn.expand("%"))
   elseif ft == "c" then
     cmd = "gcc "
       .. vim.fn.shellescape(vim.fn.expand("%"))
@@ -36,7 +37,6 @@ local function run_code()
     return
   end
 
-  -- ✅ use built-in terminal instead of Floaterm
   vim.cmd("term " .. cmd)
 end
 
