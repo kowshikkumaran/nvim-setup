@@ -44,3 +44,28 @@ vim.keymap.set("n", "<leader>r", run_code, { desc = "Run current file" })
 
 vim.keymap.set("i", "jj", "<esc>", { noremap = true })
 vim.keymap.set("t", "jj", "<C-\\><C-n>", { noremap = true, silent = true })
+
+return {
+  "LazyVim/LazyVim",
+  opts = function(_, opts)
+    local map = vim.keymap.set
+    local opts = { noremap = true, silent = true }
+
+    --  Normal mode basics
+    map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
+    map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit window" })
+
+    --  Terminal mode basics
+    -- Escape to Normal mode
+    map("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
+
+    -- Window navigation from terminal
+    map("t", "<C-h>", [[<C-\><C-n><C-w>h]], { desc = "Go left" })
+    map("t", "<C-j>", [[<C-\><C-n><C-w>j]], { desc = "Go down" })
+    map("t", "<C-k>", [[<C-\><C-n><C-w>k]], { desc = "Go up" })
+    map("t", "<C-l>", [[<C-\><C-n><C-w>l]], { desc = "Go right" })
+
+    map("n", "<leader>tt", "<cmd>terminal<cr>", { desc = "New terminal" })
+    map("t", "<CR>", "<CR>", { desc = "Send Enter inside terminal" })
+  end,
+}
