@@ -1,5 +1,5 @@
--- File: lua/config/keymaps.lua (your file)
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- File: lua/config/keymaps.lua
+-- Default keymaps: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
 -- =========================
 -- Run Code per Filetype
@@ -11,16 +11,19 @@ local function run_code()
   if ft == "python" then
     cmd = "py -3.11 " .. vim.fn.shellescape(vim.fn.expand("%"))
   elseif ft == "java" then
-    local filename = vim.fn.expand("%:t") -- e.g. Main.java
-    local classname = vim.fn.expand("%:t:r") -- e.g. Main (without .java)
-    local filepath = vim.fn.expand("%:p") -- full path
+    local filename = vim.fn.expand("%:t")
+    local classname = vim.fn.expand("%:t:r")
+    local filepath = vim.fn.expand("%:p")
 
-    -- Compile to the same directory
-    cmd = "javac "
+    local javafx_path = "C:/Users/91994/Downloads/openjfx-24.0.2_windows-x64_bin-sdk/javafx-sdk-24.0.2/lib"
+
+    cmd = "javac --module-path "
+      .. vim.fn.shellescape(javafx_path)
+      .. " --add-modules=javafx.controls -d out "
       .. vim.fn.shellescape(filepath)
-      .. " && java -cp "
-      .. vim.fn.shellescape(vim.fn.expand("%:p:h"))
-      .. " "
+      .. " && java --module-path "
+      .. vim.fn.shellescape(javafx_path)
+      .. " --add-modules=javafx.controls -cp out "
       .. classname
   elseif ft == "javascript" then
     cmd = "node " .. vim.fn.shellescape(vim.fn.expand("%"))
