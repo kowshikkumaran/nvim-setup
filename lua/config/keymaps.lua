@@ -45,6 +45,8 @@ local function run_code()
     cmd = "go run " .. vim.fn.shellescape(vim.fn.expand("%"))
   elseif ft == "lua" then
     cmd = "lua " .. vim.fn.shellescape(vim.fn.expand("%"))
+  elseif ft == "html" then
+    cmd = "start " .. vim.fn.expand("%:p")
   else
     vim.notify("No run command set for filetype: " .. ft, vim.log.levels.WARN)
     return
