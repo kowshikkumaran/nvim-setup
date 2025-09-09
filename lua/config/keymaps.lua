@@ -66,5 +66,11 @@ vim.keymap.set("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true })
 -- =========================
 -- Terminal mappings
 -- =========================
-vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
-vim.keymap.set("t", "<leader>tt", [[<C-\><C-n><cmd>ToggleTerm<cr>]], { desc = "Toggle terminal" })
+
+vim.keymap.set("n", "<leader>tt", function()
+  vim.cmd("ToggleTerm")
+end, { desc = "Toggle terminal" })
+
+vim.keymap.set("t", "<leader>tt", function()
+  vim.cmd("ToggleTerm")
+end, { desc = "Toggle terminal" })
