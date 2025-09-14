@@ -11,7 +11,6 @@ local function run_code()
   if ft == "python" then
     cmd = "py -3.11 " .. vim.fn.shellescape(vim.fn.expand("%"))
   elseif ft == "java" then
-    local filename = vim.fn.expand("%:t")
     local classname = vim.fn.expand("%:t:r")
     local filepath = vim.fn.expand("%:p")
 
@@ -74,3 +73,7 @@ end, { desc = "Toggle terminal" })
 vim.keymap.set("t", "<leader>tt", function()
   vim.cmd("ToggleTerm")
 end, { desc = "Toggle terminal" })
+
+-- Close terminal with 'q'
+-- Close terminal with 'q'
+vim.keymap.set("n", "q", [[<C-\><C-n>:q<CR>]], { desc = "Quit terminal" })
