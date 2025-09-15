@@ -1,9 +1,9 @@
 -- File: lua/config/keymaps.lua
 -- Default keymaps: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
--- =========================
+-- ========================
 -- Run Code per Filetype
--- =========================
+-- ========================
 local function run_code()
   local ft = vim.bo.filetype
   local cmd = ""
