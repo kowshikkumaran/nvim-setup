@@ -14,16 +14,30 @@ local function run_code()
     local classname = vim.fn.expand("%:t:r")
     local filepath = vim.fn.expand("%:p")
 
-    local javafx_path = "C:/Users/91994/Downloads/openjfx-24.0.2_windows-x64_bin-sdk/javafx-sdk-24.0.2/lib"
+    local lines = vim.fn.readfile(filepath)
+    local uses_javafx = false
 
-    cmd = "javac --module-path "
-      .. vim.fn.shellescape(javafx_path)
-      .. " --add-modules=javafx.controls -d out "
-      .. vim.fn.shellescape(filepath)
-      .. " && java --module-path "
-      .. vim.fn.shellescape(javafx_path)
-      .. " --add-modules=javafx.controls -cp out "
-      .. classname
+    for _, line in ipairs(lines) do
+      if line:match("javafx") then
+        uses_javafx = true
+        break
+      end
+    end
+
+    if uses_javafx then
+      local javafx_path = "C:/Users/91994/Downloads/openjfx-24.0.2_windows-x64_bin-sdk/javafx-sdk-24.0.2/lib"
+
+      cmd = "javac --module-path "
+        .. vim.fn.shellescape(javafx_path)
+        .. " --add-modules=javafx.controls -d out "
+        .. vim.fn.shellescape(filepath)
+        .. " && java --module-path "
+        .. vim.fn.shellescape(javafx_path)
+        .. " --add-modules=javafx.controls -cp out "
+        .. classname
+    else
+      cmd = "javac " .. vim.fn.shellescape(filepath) .. " && java " .. classname
+    end
   elseif ft == "javascript" then
     cmd = "node " .. vim.fn.shellescape(vim.fn.expand("%"))
   elseif ft == "c" then
