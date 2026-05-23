@@ -10,23 +10,10 @@ local function run_code()
 
   if ft == "python" then
     cmd = "py -3.11 " .. vim.fn.shellescape(vim.fn.expand("%"))
-  elseif ft == "java" then
-    local classname = vim.fn.expand("%:t:r")
-    local filepath = vim.fn.expand("%:p")
 
-    local lines = vim.fn.readfile(filepath)
-    local uses_javafx = false
-
-    for _, line in ipairs(lines) do
-      if line:match("javafx") then
-        uses_javafx = true
-        break
-      end
-    end
-
-    if ft == "java" then
+  elif ft == "java" then
       cmd = "javac " .. vim.fn.shellescape(filepath) .. " && java " .. classname
-    end
+    
   elseif ft == "javascript" then
     cmd = "node " .. vim.fn.shellescape(vim.fn.expand("%"))
   elseif ft == "c" then
