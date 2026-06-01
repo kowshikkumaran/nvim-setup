@@ -64,7 +64,9 @@ return {
   },
 
   -- add pyright to lspconfig
-  {
+  vim.pack.add({
+    { src = "https://github.com/neovim/nvim-lspconfig" },
+  })({
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = {
@@ -74,7 +76,7 @@ return {
         pyright = {},
       },
     },
-  },
+  }),
 
   -- add tsserver and setup with typescript.nvim instead of lspconfig
   {
@@ -134,6 +136,8 @@ return {
         "typescript",
         "vim",
         "yaml",
+        "java",
+        "go",
       },
     },
   },

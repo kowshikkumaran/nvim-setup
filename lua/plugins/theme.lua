@@ -1,0 +1,1 @@
+/home/cosec/.config/omarchy/current/theme/neovim.lua
